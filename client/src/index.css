@@ -7,3 +7,127 @@
   padding: 0;
   margin: 0;
 }
+
+.slider {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.right-arrow {
+  position: absolute;
+  top: 50%;
+  right: 32px;
+  font-size: 3rem;
+  color: #000;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.left-arrow {
+  position: absolute;
+  top: 50%;
+  left: 32px;
+  font-size: 3rem;
+  color: #000;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+}
+
+@layer components {
+  .container {
+    @apply max-w-screen-xl w-full mx-auto px-6;
+  }
+  .nav__item {
+    @apply ml-8;
+  }
+  .nav__link {
+    @apply text-base font-medium;
+  }
+  .nav__circle {
+    @apply flex justify-center items-center w-[22px] h-[22px] rounded-full bg-indigo-600 text-xs text-white font-medium absolute -top-1 -right-3;
+  }
+
+  .slider-circles {
+    @apply bg-white bg-opacity-30 rounded-full w-48 h-48 flex flex-col items-center justify-center;
+  }
+
+
+  .swiper {
+    width: 100%;
+    height: 100vh;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide:first-child {
+    @apply relative;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Form */
+
+  .header-heading {
+    @apply text-white text-2xl capitalize font-medium;
+  }
+  .heading {
+    @apply text-lg capitalize font-medium;
+  }
+  .form-label {
+    @apply block mb-1.5 text-sm font-medium capitalize text-gray-700;
+  }
+  .form-input {
+    @apply w-full border px-3 py-3 border-gray-300 rounded-md outline-none;
+  }
+  .error {
+    @apply block mt-1.5 text-rose-600 font-medium text-sm;
+  }
+  .form-control {
+    @apply w-full bg-palette2 p-3 rounded outline-none text-gray-400 focus:ring-[3px] ring-palette4 transition-all duration-300 placeholder:capitalize;
+  }
+  .btn-indigo {
+    @apply bg-indigo-600 w-1/4 p-3 cursor-pointer text-white rounded-lg;
+  }
+  .btn-form {
+    @apply bg-palette4 w-1/4 p-3 cursor-pointer text-white rounded-lg;
+  }
+
+
+}
