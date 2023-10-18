@@ -1,20 +1,25 @@
 import React, { memo, useCallback, useState } from "react";
-import { GoogleMap, InfoWindow, useLoadScript, Marker } from "@react-google-maps/api";
-function MapDash() {
+import {
+  GoogleMap,
+  InfoWindow,
+  useLoadScript,
+  Marker,
+} from "@react-google-maps/api";
+function MapDash({ center }) {
   const apiKey = "AIzaSyDAdnf6eqCFBTcFRQ3wHAFGIrVArQJzh0c";
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: apiKey,
   });
 
   const containerStyle = {
-    width: "100%",
-    height: "100vh",
+    width: "60%",
+    height: "50vh",
   };
 
-  const center = {
-    lat: 37.0012220691501,
-    lng: 35.32191010386118,
-  };
+  // const center = {
+  //   lat: 37.0012220691501,
+  //   lng: 35.32191010386118,
+  // };
 
   return (
     <>
@@ -23,7 +28,7 @@ function MapDash() {
       ) : (
         <GoogleMap
           mapContainerStyle={containerStyle}
-          center={center}
+          center={center || { lat: 37.0012220691501, lng: 35.32191010386118 }} // Use the provided center or a default value
           zoom={15}
         >
           {/* {visibleStops.map((stop) => (

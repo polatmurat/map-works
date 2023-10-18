@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "../components/Nav";
 import Slider from "../components/home/Slider";
 
-const Dashboard = () => {
+const Home = () => {
   return (
     <>
       <Nav />
@@ -11,4 +11,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Home;
