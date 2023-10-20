@@ -67,10 +67,12 @@
 
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay, Mousewheel, Scrollbar } from "swiper/modules";
 import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/css/mousewheel";
+import "swiper/css/scrollbar";
 import { SliderData } from "./SliderData";
 import { GiKnifeFork } from "react-icons/gi";
 import { PiCoffeeLight } from "react-icons/pi";
@@ -82,10 +84,12 @@ const Slider = () => {
       pagination={{
         dynamicBullets: true,
       }}
-      modules={[Pagination]}
+      modules={[Pagination, Autoplay, Mousewheel, Scrollbar]}
+      mousewheel
       className="swiper cursor-pointer"
+      scrollbar={{ draggable: true }}
       autoplay={{
-        delay: 4000, // Otomatik geçiş süresi (4 saniye)
+        delay: 3000, // Otomatik geçiş süresi (4 saniye)
         disableOnInteraction: false, // Kullanıcı etkileşime girdiğinde otomatik geçişi devre dışı bırakma
       }}
     >

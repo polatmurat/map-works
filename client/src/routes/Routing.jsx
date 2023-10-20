@@ -5,6 +5,8 @@ import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import Dashboard from "../pages/Dashboard";
 import PrivateUser from "./PrivateUser";
+import Account from "../pages/auth/Account";
+import UserAuthRoute from "./UserAuthRoute";
 
 const Routing = () => {
   return (
@@ -12,13 +14,16 @@ const Routing = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route element={<UserAuthRoute />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route
-            path="/dashboard"
+            path="/user"
             element={
               <PrivateUser>
-                <Dashboard />
+                <Account />
               </PrivateUser>
             }
           />

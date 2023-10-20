@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/home/Header";
 import { motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
@@ -6,7 +6,7 @@ import { useForm } from "../../hooks/Form";
 import Nav from "../../components/Nav";
 import { ShowError } from "../../utils/ShowError";
 import { useUserLoginMutation } from "../../features/auth/authService";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUserToken } from "../../app/reducers/authReducer";
 
 const Login = () => {
@@ -75,9 +75,9 @@ const Login = () => {
                     onChange={onChange}
                     value={state.email}
                   />
-                  {/* {ShowError(errors, "email") && (
-                  <span className="error">{ShowError(errors, "email")}</span>
-                )} */}
+                  {ShowError(errors, "email") && (
+                    <span className="error">{ShowError(errors, "email")}</span>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label htmlFor="password" className="form-label">

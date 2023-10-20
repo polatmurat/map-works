@@ -1,16 +1,16 @@
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Header from "../../components/home/Header";
 import { motion } from "framer-motion";
-// import { useUserLoginMutation } from "../../../features/auth/authService";
-import React, { useEffect, useState } from "react";
-// import { useDispatch } from "react-redux";
-// import { setUserToken } from "../../../app/reducers/authReducer";
+import { useUserRegisterMutation } from "../../features/auth/authService";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserToken } from "../../app/reducers/authReducer";
 import { useForm } from "../../hooks/Form";
 import Nav from "../../components/Nav";
-// import { ShowError } from "../../../utils/ShowError";
+import { ShowError } from "../../utils/ShowError";
 
 const Register = () => {
-  //   const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   const { state, onChange } = useForm({
     name: "",
@@ -18,29 +18,29 @@ const Register = () => {
     password: "",
   });
 
-  //   const [loginUser, response] = useUserLoginMutation();
+  const [registerUser, response] = useUserRegisterMutation();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // loginUser(state);
+    registerUser(state);
   };
 
-  //   useEffect(() => {
-  //     if (response.isError) {
-  //       setErrors(response?.error?.data?.errors);
-  //     }
-  //   }, [response?.error?.data]);
+  useEffect(() => {
+    if (response.isError) {
+      setErrors(response?.error?.data?.errors);
+    }
+  }, [response?.error?.data]);
 
-  //   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  //   useEffect(() => {
-  //     if (response.isSuccess) {
-  //       localStorage.setItem("user-token", response?.data?.token);
-  //       dispatch(setUserToken(response?.data?.token));
-  //       navigate("/user");
-  //     }
-  //   });
+  useEffect(() => {
+    if (response.isSuccess) {
+      localStorage.setItem("user-token", response?.data?.token);
+      dispatch(setUserToken(response?.data?.token));
+      navigate("/user");
+    }
+  });
 
   return (
     <>
@@ -67,19 +67,18 @@ const Register = () => {
                     type="text"
                     name="name"
                     id="name"
-                    //   className={`form-input ${
-                    //     ShowError(errors, "name")
-                    //       ? "border-rose-600"
-                    //       : "border-gray-300"
-                    //   }`}
-                    className="form-input"
+                    className={`form-input ${
+                      ShowError(errors, "name")
+                        ? "border-rose-600"
+                        : "border-gray-300"
+                    }`}
                     placeholder="Name..."
                     value={state.name}
                     onChange={onChange}
                   />
-                  {/* {showErrors("name") && (
-                  <span className="error">{ShowError(errors, "name")}</span>
-                )} */}
+                  {ShowError("name") && (
+                    <span className="error">{ShowError(errors, "name")}</span>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label htmlFor="email" className="form-label">
@@ -89,19 +88,18 @@ const Register = () => {
                     type="email"
                     name="email"
                     id="email"
-                    //   className={`form-input ${
-                    //     ShowError(errors, "email")
-                    //       ? "border-rose-600"
-                    //       : "border-gray-300"
-                    //   }`}
-                    className="form-input"
+                    className={`form-input ${
+                      ShowError(errors, "email")
+                        ? "border-rose-600"
+                        : "border-gray-300"
+                    }`}
                     placeholder="E-mail..."
                     value={state.email}
                     onChange={onChange}
                   />
-                  {/* {ShowError(errors, "email") && (
-                  <span className="error">{ShowError(errors, "email")}</span>
-                )} */}
+                  {ShowError(errors, "email") && (
+                    <span className="error">{ShowError(errors, "email")}</span>
+                  )}
                 </div>
                 <div className="mb-4">
                   <label htmlFor="password" className="form-label">
@@ -111,26 +109,26 @@ const Register = () => {
                     type="password"
                     name="password"
                     id="password"
-                    //   className={`form-input ${
-                    //     ShowError(errors, "password")
-                    //       ? "border-rose-600"
-                    //       : "border-gray-300"
-                    //   }`}
-                    className="form-input"
+                    className={`form-input ${
+                      ShowError(errors, "password")
+                        ? "border-rose-600"
+                        : "border-gray-300"
+                    }`}
                     placeholder="Password..."
                     value={state.password}
                     onChange={onChange}
                   />
-                  {/* {ShowError(errors, "password") && (
-                  <span className="error">{ShowError(errors, "password")}</span>
-                )} */}
+                  {ShowError(errors, "password") && (
+                    <span className="error">
+                      {ShowError(errors, "password")}
+                    </span>
+                  )}
                 </div>
                 <div className="mb-4">
                   <input
                     type="submit"
-                    value={"Sign Up"}
-                    //   value={response.isLoading ? "Loading..." : "Sign Up"}
-                    //   disabled={response.isLoading ? true : false}
+                    value={response.isLoading ? "Loading..." : "Sign Up"}
+                    disabled={response.isLoading ? true : false}
                     className="btn btn-form text-gray-800 font-medium w-full"
                   />
                 </div>
