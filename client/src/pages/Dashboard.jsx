@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import MapDash from "../map/MapDash";
 import SidebarCities from "../components/skeleton/SidebarCities";
@@ -9,6 +9,19 @@ const Dashboard = () => {
   const handleCityClick = (latitude, longitude) => {
     setSelectedCityCoordinates({ lat: latitude, lng: longitude });
   };
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) =>
+          setSelectedCityCoordinates({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }),
+        () => console.log("An error occured.")
+      );
+    }
+  }, []);
 
   return (
     <>
