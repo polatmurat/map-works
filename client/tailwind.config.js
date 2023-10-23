@@ -167,7 +167,13 @@ export default {
       palette3: '#F7E6C4',
       palette4: '#F1C376',
       dark1: '#030301',
-      dark2: '#1a1d24'
+      dark2: '#1a1d24',
+      epalette1: '#18122B',
+      epalette2: '#393053',
+      epalette3: '#443C68',
+      epalette4: '#635985',
+      edark1: '#030301',
+      edark2: '#1a1d24',
     }),
     columns: {
       auto: 'auto',

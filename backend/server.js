@@ -4,17 +4,19 @@ const colors = require('colors');
 const cors = require('cors');
 const connect = require('./config/db');
 const userRoute = require('./routes/userRoute');
+const placeRoute = require('./routes/placeRoute');
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/api',userRoute);
+app.use('/api', userRoute);
+app.use('/api', placeRoute); 
 
 app.get('/try', async (req, res) => {
-    return res.status(200).json({msg: 'Working'})
+    return res.status(200).json({ msg: 'Working' })
 });
 
 const PORT = process.env.PORT;

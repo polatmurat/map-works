@@ -44,7 +44,7 @@ const Login = () => {
   return (
     <>
       <Nav />
-      <div className="min-h-screen bg-palette2 bg-opacity-90 w-full">
+      <div className="min-h-screen b-logreg bg-opacity-90 w-full">
         <div className="">
           <Header>Sign In</Header>
           <div className="flex flex-wrap justify-center">
@@ -107,7 +107,7 @@ const Login = () => {
                     type="submit"
                     value={response.isLoading ? "Loading..." : "Sign In"}
                     disabled={response.isLoading ? true : false}
-                    className="btn btn-form text-gray-800 font-medium w-full"
+                    className="btn btn-form font-medium w-full hover:bg-epalette3 transition-colors"
                   />
                 </div>
                 <div>

@@ -13,8 +13,8 @@ const Dashboard = () => {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        (position) =>
-          setSelectedCityCoordinates({
+        async (position) =>
+          await setSelectedCityCoordinates({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           }),
@@ -25,14 +25,16 @@ const Dashboard = () => {
 
   return (
     <>
-      <Nav />
-      <div className="mt-[70px] flex min-h-screen w-full">
-        <div className="w-[20%] bg-gray-700 h-[100vh] text-white overflow-y-auto fixed">
-          <SidebarCities onCityClick={handleCityClick} />
-        </div>
-        <div className="w-[80%] flex flex-col justify-around items-center ml-[20%]">
-          <MapDash center={selectedCityCoordinates} />
-          <div>Murat</div>
+      <div className="">
+        <Nav />
+        <div className="mt-[70px] flex min-h-screen w-full">
+          <div className="w-[20%] bg-gray-700 h-[100vh] text-white overflow-y-auto fixed">
+            <SidebarCities onCityClick={handleCityClick} />
+          </div>
+          <div className="w-[80%] flex flex-col justify-around items-center ml-[20%]">
+            <MapDash center={selectedCityCoordinates} />
+            <div>Murat</div>
+          </div>
         </div>
       </div>
     </>

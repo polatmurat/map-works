@@ -42,7 +42,7 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
     const errors = validationResult(req);
-
+        
     if (errors.isEmpty()) {
         const { email, password } = req.body;
 

@@ -10,14 +10,22 @@
 
 ::-webkit-scrollbar {
   width: 10px;
-  height: 20px;
+  height: 10px;
+}
+
+.b-logreg {
+  background: linear-gradient(to bottom, #315768, #7f531f);
+}
+.b-reglog {
+  background: linear-gradient(to left, #7f531f, #315768);
+}
+
+.b-dash {
+  background: linear-gradient(to bottom, #334e57, #555545);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(
-  to bottom,
-  #607EAA,
-  #FF06B7);
+  background: linear-gradient(to bottom, #607eaa, #ff06b7);
 
   border-radius: 50px;
 }
@@ -78,6 +86,18 @@
   .container {
     @apply max-w-screen-xl w-full mx-auto px-6;
   }
+
+  /* Pagination */
+
+  .pagination-link {
+    @apply border border-gray-900 text-gray-500 text-sm font-medium block py-2 px-4 bg-gray-100;
+  }
+  .pagination-active {
+    @apply bg-gray-400 text-gray-900;
+  }
+
+  /* Navigation */
+
   .nav__item {
     @apply ml-8;
   }
@@ -138,13 +158,16 @@
     @apply block mt-1.5 text-rose-600 font-medium text-sm;
   }
   .form-control {
-    @apply w-full bg-palette2 p-3 rounded outline-none text-gray-400 focus:ring-[3px] ring-palette4 transition-all duration-300 placeholder:capitalize;
+    @apply w-full bg-epalette3 p-3 rounded outline-none text-gray-400 focus:ring-[3px] ring-epalette4 transition-all duration-300 placeholder:capitalize;
   }
   .btn-indigo {
     @apply bg-indigo-600 w-1/4 p-3 cursor-pointer text-white rounded-lg;
   }
   .btn-form {
-    @apply bg-palette4 w-1/4 p-3 cursor-pointer text-white rounded-lg;
+    @apply bg-epalette2 w-1/4 p-3 cursor-pointer text-white rounded-lg;
+  }
+  .btn-dark {
+    @apply bg-epalette1 px-4 py-3 capitalize font-medium cursor-pointer;
   }
 
   /* user account */

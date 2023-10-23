@@ -12,12 +12,11 @@ const Nav = () => {
       <div className="container">
         <div className="flex justify-between items-center">
           <Link to="/">
-            {/* <img
-              src="./logo.jpg"
+            <img
+              src="./images/logo-light.png"
               className="h-[70px] w-[130px] rounded-md object-cover"
               alt="logo"
-            /> */}
-            <h1>Map Works</h1>
+            />
           </Link>
           <ul className="flex items-center">
             <li className="nav__item cursor-pointer">

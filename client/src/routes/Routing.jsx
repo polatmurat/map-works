@@ -7,6 +7,9 @@ import Dashboard from "../pages/Dashboard";
 import PrivateUser from "./PrivateUser";
 import Account from "../pages/auth/Account";
 import UserAuthRoute from "./UserAuthRoute";
+import Places from "../pages/places/Places";
+import UpdatePlaces from "../pages/places/UpdatePlaces";
+import CreatePlace from "../pages/places/CreatePlace";
 
 const Routing = () => {
   return (
@@ -27,6 +30,47 @@ const Routing = () => {
               </PrivateUser>
             }
           />
+          <Route
+            path="dashboard"
+            // element={
+            //   <PrivateUser>
+            //     <Dashboard />
+            //   </PrivateUser>
+            // }
+          >
+            <Route
+              path="update-place/:id"
+              element={
+                <PrivateUser>
+                  <UpdatePlaces />
+                </PrivateUser>
+              }
+            />
+          <Route
+            path="places"
+            element={
+              <PrivateUser>
+                <Places />
+              </PrivateUser>
+            }
+          />
+          <Route
+            path="places/:page"
+            element={
+              <PrivateUser>
+                <Places />
+              </PrivateUser>
+            }
+          />
+            <Route
+              path="create-place"
+              element={
+                <PrivateUser>
+                  <CreatePlace />
+                </PrivateUser>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>

@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "name": "Daily Dose Coffee",
+        "category": "coffee",
+        "coordinates": {
+            "lat": 37.00128949807853,
+            "lng": 35.321856358738025
+        }
+    },
+    {
+        "id": 2,
+        "name": "Yeşil Kapı Kebap",
+        "category": "restaurant",
+        "coordinates": {
+            "lat": 36.99774097736569,
+            "lng": 35.33157353847141
+        }
+    },
+    {
+        "id": 3,
+        "name": "Pote Lounge",
+        "category": "restaurant",
+        "coordinates": {
+            "lat": 37.0007145137489,
+            "lng": 35.32869888798075
+        }
+    },
+    {
+        "id": 4,
+        "name": "Dosta Gider Fırını",
+        "category": "restaurant",
+        "coordinates": {
+            "lat": 37.04109713865086,
+            "lng": 35.38686938471864
+        }
+    },
+    {
+        "id": 5,
+        "name": "Cajun Corner",
+        "category": "restaurant",
+        "coordinates": {
+            "lat": 37.056627343117995,
+            "lng": 35.38835900755304
+        }
+    }
+]
