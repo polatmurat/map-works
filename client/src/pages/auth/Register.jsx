@@ -38,7 +38,7 @@ const Register = () => {
     if (response.isSuccess) {
       localStorage.setItem("user-token", response?.data?.token);
       dispatch(setUserToken(response?.data?.token));
-      navigate("/user");
+      navigate("/dashboard");
     }
   });
 

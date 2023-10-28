@@ -26,7 +26,7 @@ const Sidebar = ({ side, closeSidebar }) => {
         </li>
         <li className="px-4 py-5 cursor-pointer transition-all text-white flex items-center hover:bg-gray-600">
           <BsCardList className="mr-2 text-lg inline-block" />
-          <Link to="/dashboard/products" className="text-base capitalize">
+          <Link to="/dashboard/places" className="text-base capitalize">
             Places
           </Link>
         </li>

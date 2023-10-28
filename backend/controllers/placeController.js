@@ -73,12 +73,4 @@ const deleteProduct = async (req, res) => {
     }
 };
 
-const getAll = async (req,res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-};
-
 module.exports = { createPlace, get, deleteProduct };

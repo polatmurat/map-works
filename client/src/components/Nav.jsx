@@ -20,14 +20,15 @@ const Nav = () => {
           </Link>
           <ul className="flex items-center">
             <li className="nav__item cursor-pointer">
-              <Link to="/dashboard">
-                <BiHomeAlt2 size={22} />
+              <Link to="/dashboard" className="nav__link flex justify-center items-center text-black">
+                <BiHomeAlt2 size={22} className="mr-1" />
+                Home
               </Link>
             </li>
 
             {userToken ? (
               <li className="nav__item text-black">
-                <Link to="/user" className="nav__link">
+                <Link to="/dashboard/places" className="nav__link">
                   {user?.name}
                 </Link>
               </li>

@@ -13,6 +13,12 @@
   height: 10px;
 }
 
+
+.b-tekin {
+  background: linear-gradient(to top, #DA6D24, #4A4949);
+}
+
+
 .b-logreg {
   background: linear-gradient(to bottom, #315768, #7f531f);
 }
@@ -158,7 +164,7 @@
     @apply block mt-1.5 text-rose-600 font-medium text-sm;
   }
   .form-control {
-    @apply w-full bg-epalette3 p-3 rounded outline-none text-gray-400 focus:ring-[3px] ring-epalette4 transition-all duration-300 placeholder:capitalize;
+    @apply w-full my-2 p-3 rounded outline-none text-gray-400 focus:ring-[3px] ring-epalette4 transition-all duration-300 placeholder:capitalize;
   }
   .btn-indigo {
     @apply bg-indigo-600 w-1/4 p-3 cursor-pointer text-white rounded-lg;

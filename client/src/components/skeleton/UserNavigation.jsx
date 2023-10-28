@@ -9,7 +9,7 @@ const UserNavigation = ({ openSidebar }) => {
     dispatch(logout('user-token'));
   };
   return (
-    <nav className="fixed left-0 sm:left-64 top-4 right-0 bg-epalette4">
+    <nav className="fixed left-0 sm:left-64 top-4 right-0">
       <div className=" w-full flex items-center p-4">
         <BsFilterLeft
           className="text-white text-3xl cursor-pointer sm:hidden block"

@@ -10,10 +10,9 @@ import { clearMessage } from "../../app/reducers/globalReducer";
 import Spinner from "../../components/Spinner";
 import Pagination from "../../components/skeleton/Pagination";
 import ScreenHeader from "../../components/skeleton/ScreenHeader";
-import Wrapper from "./Wrapper";
 import { BsBox } from "react-icons/bs";
 
-const Places = () => {
+const DashPlaces = () => {
   let { page } = useParams();
   if (!page) {
     page = 1;
@@ -35,30 +34,10 @@ const Places = () => {
   //   };
   // }, []);
 
-  console.log(data, " dataaaaa");
 
-  const [deleteProduct, response] = useDeletePlaceMutation();
 
-  const delProd = (prodID) => {
-    if (window.confirm("Are you sure to delete that product?")) {
-      deleteProduct(prodID);
-    }
-  };
-
-  console.log(response);
   return (
-    <>
-      <Wrapper>
-        <ScreenHeader>
-          <Link
-            to="/dashboard/create-place"
-            className="btn-dark inline-flex items-center"
-          >
-            <BsBox className="mr-2" />
-            Create Place
-          </Link>
-          <Toaster position="top-right" />
-        </ScreenHeader>
+    <div>
         {!isFetching ? (
           data?.places?.length > 0 ? (
             <>
@@ -78,12 +57,6 @@ const Places = () => {
                       <th className="p-3 uppercase text-base font-sm text-gray-800">
                         Province
                       </th>
-                      <th className="p-3 uppercase text-base font-sm text-gray-800">
-                        Edit
-                      </th>
-                      <th className="p-3 uppercase text-base font-sm text-gray-800">
-                        Delete
-                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -100,22 +73,6 @@ const Places = () => {
                         </td>
                         <td className="p-3 capitalize text-sm font-normal text-black">
                           {place.province}
-                        </td>
-                        <td className="p-3 capitalize text-sm font-normal text-black">
-                          <Link
-                            to={`/dashboard/update-product/${place._id}`}
-                            className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-sm"
-                          >
-                            Edit
-                          </Link>
-                        </td>
-                        <td className="p-3 capitalize text-sm font-normal text-black">
-                          <a
-                            className="bg-red-500 w-1/4 px-4 py-2 cursor-pointer text-white rounded-sm"
-                            onClick={() => delProd(place._id)}
-                          >
-                            Delete
-                          </a>
                         </td>
                       </tr>
                     ))}
@@ -135,9 +92,8 @@ const Places = () => {
         ) : (
           <Spinner />
         )}
-      </Wrapper>
-    </>
+    </div>
   );
 };
 
-export default Places;
+export default DashPlaces;
