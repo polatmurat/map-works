@@ -13,6 +13,9 @@ const createPlace = async (req, res) => {
             if (parsedData.name.trim().length === 0) {
                 errors.push({ msg: 'The name field cannot be left blank!' });
             }
+            if (parsedData.authorID.trim().length === 0) {
+                errors.push({ msg: 'The author cannot find!' });
+            }
             if (parsedData.category.trim().length === 0) {
                 errors.push({ msg: 'The category field cannot be left blank!' });
             }
@@ -25,7 +28,7 @@ const createPlace = async (req, res) => {
                     const placeCollection = client.db('mapworks').collection('place');
                     const placeExists = await placeCollection.findOne({ 'coordinates.lat': parsedData.coordinates.lat, 'coordinates.lng': parsedData.coordinates.lng });
                     if (!placeExists) {
-                        const place = new Place(parsedData.name, parsedData.category, parsedData.city, parsedData.province, parsedData.coordinates, fields.description[0]);
+                        const place = new Place(parsedData.name, parsedData.category, parsedData.city, parsedData.province, parsedData.coordinates, fields.description[0], parsedData.authorID);
                         await placeCollection.insertOne(place);
                         return res.status(201).json({ msg: 'Place created successfully.' });
                     } else {
@@ -59,6 +62,34 @@ const get = async (req, res) => {
 
 };
 
+const fetch = async (req, res) => {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ error: 'Place ID is missing in the request.' });
+    }
+
+
+    try {
+        const objID = new ObjectId(id);
+        const client = await connect();
+        const placeCollection = client.db('mapworks').collection('place');
+
+        const response = await placeCollection.findOne({ _id: objID });
+
+        if (!response) {
+            return res.status(404).json({ error: 'Place not found.' });
+        }
+
+        return res.status(201).json({ place: response });
+
+    } catch (error) {
+        console.error(error.message);
+        return res.status(500).json({ error: 'Server internal error!' });
+    }
+
+};
+
 const deleteProduct = async (req, res) => {
     const { id } = req.params;
     try {
@@ -73,4 +104,42 @@ const deleteProduct = async (req, res) => {
     }
 };
 
-module.exports = { createPlace, get, deleteProduct };
+const updatePlace = async (req, res) => {
+
+    const form = new formidable.IncomingForm({ multiples: true });
+    form.parse(req, async (err, fields) => {
+        if (!err) {
+            const parsedData = JSON.parse(fields.data);
+            const errors = [];
+
+            if (parsedData.name.trim().length === 0) {
+                errors.push({ msg: 'The name field cannot be left blank!' });
+            }
+            if (parsedData.category.trim().length === 0) {
+                errors.push({ msg: 'The category field cannot be left blank!' });
+            }
+            if ((parsedData.coordinates.lat).trim().length === 0 || (parsedData.coordinates.lng).trim().length === 0) {
+                errors.push({ msg: 'The both coordinates must be filled!' });
+            }
+            if (errors.length === 0) {
+                try {
+                    const client = await connect();
+                    const placeCollection = client.db('mapworks').collection('place');
+                    const {_id: id, name, category, city, province, coordinates} = parsedData;
+                    const description = fields.description[0];
+                    const response = await placeCollection.updateOne({_id: new ObjectId(id)}, {$set: {name, category, city, province, coordinates, description, updatedAt: new Date()}});
+                    return res.status(201).json({ msg: 'Place updated successfully.' });
+
+                } catch (error) {
+                    console.log(error);
+                    res.status(500).json(error);
+                }
+            } else {
+                return res.status(400).json({ errors });
+            }
+        }
+    });
+
+};
+
+module.exports = { createPlace, get, deleteProduct, updatePlace, fetch };

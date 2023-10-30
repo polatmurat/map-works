@@ -103,7 +103,7 @@ const Places = () => {
                         </td>
                         <td className="p-3 capitalize text-sm font-normal text-black">
                           <Link
-                            to={`/dashboard/update-product/${place._id}`}
+                            to={`/dashboard/update-place/${place._id}`}
                             className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-sm"
                           >
                             Edit

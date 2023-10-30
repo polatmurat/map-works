@@ -54,7 +54,7 @@ const placeService = createApi({
             }),
             fetchPlace: builder.query({
                 query: (id) => ({
-                    url: `places/${id}`,
+                    url: `place/${id}`,
                     method: 'GET'
                 }),
                 providesTags: ['places']

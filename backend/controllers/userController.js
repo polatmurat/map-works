@@ -58,7 +58,7 @@ const login = async (req, res) => {
 
                 if (await comparePassword(password, user.password)) {
                     const token = await createToken(user);
-
+                    console.log(token);
                     return res.status(201).json({ token })
                 } else {
                     return res.status(400).json({ errors: [{ msg: 'Password not matched. Login failure!', path: 'password' }] });

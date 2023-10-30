@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Wrapper from "./Wrapper";
 import { BsArrowLeft } from "react-icons/bs";
 import Spinner from "../../components/Spinner";
@@ -14,6 +14,8 @@ import { setSuccess } from "../../app/reducers/globalReducer";
 const CreatePlace = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.authReducer);
 
   const [value, setValue] = useState("");
   const [categories, setCategories] = useState([
@@ -29,6 +31,7 @@ const CreatePlace = () => {
     city: "",
     province: "",
     coordinates: { lat: "", lng: "" },
+    authorID: user.id 
   });
 
   const handlePlace = (e) => {
@@ -67,7 +70,7 @@ const CreatePlace = () => {
     const formData = new FormData();
 
     formData.append("data", JSON.stringify(state));
-    formData.append('description', value);
+    formData.append("description", value);
 
     console.log(formData);
 
