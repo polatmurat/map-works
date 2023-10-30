@@ -27,7 +27,7 @@ const Dashboard = () => {
   return (
     <>
         <Nav />
-        <div className="flex min-h-screen w-full b-tekin">
+        <div className="flex min-h-screen w-full b-tekin bg-opacity-90">
           <div className="w-[20%] bg-gray-700 h-[100vh] text-white overflow-y-auto fixed mt-[75px]">
             <SidebarCities onCityClick={handleCityClick} />
           </div>
