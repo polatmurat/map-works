@@ -20,7 +20,7 @@ const register = async (req, res) => {
 
                 const cryptedPassword = await hashedPassword(password);
 
-                const user = new User(name, email, cryptedPassword);
+                const user = new User(name, email, cryptedPassword, false);
 
                 await userCollection.insertOne(user);
 
@@ -58,8 +58,11 @@ const login = async (req, res) => {
 
                 if (await comparePassword(password, user.password)) {
                     const token = await createToken(user);
-                    console.log(token);
-                    return res.status(201).json({ token })
+                    if(user.admin) {
+                        return res.status(201).json({token, admin: true});
+                    } else {
+                        return res.status(201).json({ token, admin: false });
+                    }
                 } else {
                     return res.status(400).json({ errors: [{ msg: 'Password not matched. Login failure!', path: 'password' }] });
                 }

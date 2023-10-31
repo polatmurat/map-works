@@ -42,7 +42,7 @@ const createPlace = async (req, res) => {
                 return res.status(400).json({ errors });
             }
         }
-    }); // Eksik parantezi burada ekledim
+    });
 };
 
 const get = async (req, res) => {
