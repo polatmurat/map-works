@@ -59,7 +59,6 @@ const get = async (req, res) => {
     } catch (error) {
         console.log(error.message);
     }
-
 };
 
 const fetch = async (req, res) => {
@@ -125,9 +124,9 @@ const updatePlace = async (req, res) => {
                 try {
                     const client = await connect();
                     const placeCollection = client.db('mapworks').collection('place');
-                    const {_id: id, name, category, city, province, coordinates} = parsedData;
+                    const { _id: id, name, category, city, province, coordinates } = parsedData;
                     const description = fields.description[0];
-                    const response = await placeCollection.updateOne({_id: new ObjectId(id)}, {$set: {name, category, city, province, coordinates, description, updatedAt: new Date()}});
+                    const response = await placeCollection.updateOne({ _id: new ObjectId(id) }, { $set: { name, category, city, province, coordinates, description, updatedAt: new Date() } });
                     return res.status(201).json({ msg: 'Place updated successfully.' });
 
                 } catch (error) {
@@ -142,4 +141,24 @@ const updatePlace = async (req, res) => {
 
 };
 
-module.exports = { createPlace, get, deleteProduct, updatePlace, fetch };
+const fetchByAuthor = async (req, res) => {
+    const { authorID } = req.params;
+
+    if (!authorID) {
+        return res.status(400).json({ error: 'The author id is require!' });
+    }
+
+    try {
+        const client = await connect();
+        const placeCollection = await client.db('mapworks').collection('place');
+
+        const response = placeCollection.find({ authorID });
+        
+        return res.status(200).json({ places: response });
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+
+module.exports = { createPlace, get, deleteProduct, updatePlace, fetch, fetchByAuthor };
