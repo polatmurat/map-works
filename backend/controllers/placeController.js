@@ -143,6 +143,7 @@ const updatePlace = async (req, res) => {
 
 const fetchByAuthor = async (req, res) => {
     const { authorID } = req.params;
+    console.log(authorID, "    ", typeof(authorID));
 
     if (!authorID) {
         return res.status(400).json({ error: 'The author id is require!' });
@@ -150,15 +151,37 @@ const fetchByAuthor = async (req, res) => {
 
     try {
         const client = await connect();
-        const placeCollection = await client.db('mapworks').collection('place');
+        const placeCollection = client.db('mapworks').collection('place');
 
-        const response = placeCollection.find({ authorID });
-        
+        const response = await placeCollection.find({authorID}).toArray();
+
         return res.status(200).json({ places: response });
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json({error : 'Server internal error!'});
+    }
+};
+
+const fetchByCategory = async (req, res) => {
+    const {category} = req.params;
+
+    if(!category) {
+        return res.status(400).json({error: 'The category is require!'});
+    }
+
+
+    try {
+        const client = await connect();
+        const placeCollection = client.db('mapworks').collection('place');
+
+        const response = await placeCollection.find({category}).toArray();
+
+        return res.status(200).json({place: response});
+
     } catch (error) {
         console.log(error.message);
     }
 };
 
 
-module.exports = { createPlace, get, deleteProduct, updatePlace, fetch, fetchByAuthor };
+module.exports = { createPlace, get, deleteProduct, updatePlace, fetch, fetchByAuthor, fetchByCategory };
