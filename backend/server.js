@@ -5,6 +5,7 @@ const cors = require('cors');
 const connect = require('./config/db');
 const userRoute = require('./routes/userRoute');
 const placeRoute = require('./routes/placeRoute');
+const categoryRoute = require('./routes/categoryRoute');
 
 const app = express();
 
@@ -13,7 +14,8 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', userRoute);
-app.use('/api', placeRoute); 
+app.use('/api', placeRoute);
+app.use('/api', categoryRoute);
 
 app.get('/try', async (req, res) => {
     return res.status(200).json({ msg: 'Working' })
