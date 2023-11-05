@@ -47,7 +47,8 @@ const categories = async (req, res) => {
 
         const count = await categoryCollection.countDocuments();
         const cursor = categoryCollection.find({}).skip(skip).limit(perPage).sort({ updatedAt: -1 });
-        const response = cursor.toArray();
+        const response = await cursor.toArray();
+        console.log(response);
         return res.status(200).json({ perPage, count, categories: response });
     } catch (error) {
         console.log(error.message);

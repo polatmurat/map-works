@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import UserNavigation from "../../components/skeleton/UserNavigation";
-import Sidebar from "../../components/skeleton/Sidebar";
+import UserNavigation from "../components/skeleton/UserNavigation";
+import Sidebar from "../components/skeleton/Sidebar";
 
 const Wrapper = ({ children }) => {
   const [side, setSide] = useState("-left-64");

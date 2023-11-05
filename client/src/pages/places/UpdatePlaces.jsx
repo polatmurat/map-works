@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Wrapper from "./Wrapper";
+import Wrapper from "../Wrapper";
 import { BsArrowLeft } from "react-icons/bs";
 import Spinner from "../../components/Spinner";
 import toast, { Toaster } from "react-hot-toast";

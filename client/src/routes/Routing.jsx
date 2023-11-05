@@ -10,6 +10,7 @@ import UserAuthRoute from "./UserAuthRoute";
 import Places from "../pages/places/Places";
 import UpdatePlaces from "../pages/places/UpdatePlaces";
 import CreatePlace from "../pages/places/CreatePlace";
+import Categories from "../pages/categories/Categories";
 
 const Routing = () => {
   return (
@@ -46,27 +47,43 @@ const Routing = () => {
                 </PrivateUser>
               }
             />
-          <Route
-            path="places"
-            element={
-              <PrivateUser>
-                <Places />
-              </PrivateUser>
-            }
-          />
-          <Route
-            path="places/:page"
-            element={
-              <PrivateUser>
-                <Places />
-              </PrivateUser>
-            }
-          />
+            <Route
+              path="places"
+              element={
+                <PrivateUser>
+                  <Places />
+                </PrivateUser>
+              }
+            />
+            <Route
+              path="places/:page"
+              element={
+                <PrivateUser>
+                  <Places />
+                </PrivateUser>
+              }
+            />
             <Route
               path="create-place"
               element={
                 <PrivateUser>
                   <CreatePlace />
+                </PrivateUser>
+              }
+            />
+            <Route
+              path="categories"
+              element={
+                <PrivateUser>
+                  <Categories />
+                </PrivateUser>
+              }
+            />
+            <Route
+              path="categories/:page"
+              element={
+                <PrivateUser>
+                  <Categories />
                 </PrivateUser>
               }
             />

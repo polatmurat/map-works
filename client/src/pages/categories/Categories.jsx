@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
-  useGetPlacesQuery,
-  useDeletePlaceMutation,
-} from "../../features/place/placeService";
+  useGetQuery,
+  useDeleteCategoryMutation,
+} from "../../features/category/categoryService";
 import toast, { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { clearMessage } from "../../app/reducers/globalReducer";
@@ -13,13 +13,13 @@ import ScreenHeader from "../../components/skeleton/ScreenHeader";
 import Wrapper from "../Wrapper";
 import { BsBox } from "react-icons/bs";
 
-const Places = () => {
+const Categories = () => {
   let { page } = useParams();
   if (!page) {
     page = 1;
   }
 
-  const { data = [], isFetching } = useGetPlacesQuery(page ? page : 1);
+  const { data = [], isFetching } = useGetQuery(page ? page : 1);
 
   // const { success } = useSelector((state) => state.globalReducer);
 
@@ -37,11 +37,11 @@ const Places = () => {
 
   console.log(data, " dataaaaa");
 
-  const [deleteProduct, response] = useDeletePlaceMutation();
+  const [deleteCategory, response] = useDeleteCategoryMutation();
 
-  const delProd = (prodID) => {
-    if (window.confirm("Are you sure to delete that product?")) {
-      deleteProduct(prodID);
+  const delCategory = (categoryID) => {
+    if (window.confirm("Are you sure to delete that category?")) {
+      deleteCategory(categoryID);
     }
   };
 
@@ -51,16 +51,16 @@ const Places = () => {
       <Wrapper>
         <ScreenHeader>
           <Link
-            to="/dashboard/create-place"
+            to="/dashboard/create-category"
             className="btn-dark inline-flex items-center"
           >
             <BsBox className="mr-2" />
-            Create Place
+            Add Categories
           </Link>
           <Toaster position="top-right" />
         </ScreenHeader>
         {!isFetching ? (
-          data?.places?.length > 0 ? (
+          data?.categories?.length > 0 ? (
             <>
               <div>
                 <table className="w-full bg-tablecolor rounded-md">
@@ -68,15 +68,6 @@ const Places = () => {
                     <tr className="border-b border-gray-800 text-left">
                       <th className="p-3 uppercase text-base font-sm text-gray-800">
                         Name
-                      </th>
-                      <th className="p-3 uppercase text-base font-sm text-gray-800">
-                        Category
-                      </th>
-                      <th className="p-3 uppercase text-base font-sm text-gray-800">
-                        City
-                      </th>
-                      <th className="p-3 uppercase text-base font-sm text-gray-800">
-                        Province
                       </th>
                       <th className="p-3 uppercase text-base font-sm text-gray-800">
                         Edit
@@ -87,32 +78,23 @@ const Places = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data?.places.map((place) => (
-                      <tr key={place._id}>
-                        <td className="p-3 capitalize text-sm font-normal text-black">
-                          {place.name}
+                    {data?.categories?.map((category) => (
+                      <tr key={category._id} className="odd:bg-gray-800">
+                        <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                          {category.name}
                         </td>
-                        <td className="p-3 capitalize text-sm font-normal text-black">
-                          {place.category}
-                        </td>
-                        <td className="p-3 capitalize text-sm font-normal text-black">
-                          {place.city}
-                        </td>
-                        <td className="p-3 capitalize text-sm font-normal text-black">
-                          {place.province}
-                        </td>
-                        <td className="p-3 capitalize text-sm font-normal text-black">
+                        <td className="p-3 capitalize text-sm font-normal text-gray-400">
                           <Link
-                            to={`/dashboard/update-place/${place._id}`}
-                            className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-sm"
+                            to={`/dashboard/update-category/${category._id}`}
+                            className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-md"
                           >
                             Edit
                           </Link>
                         </td>
-                        <td className="p-3 capitalize text-sm font-normal text-black">
+                        <td className="p-3 capitalize text-sm font-normal text-gray-400">
                           <a
-                            className="bg-red-500 w-1/4 px-4 py-2 cursor-pointer text-white rounded-sm"
-                            onClick={() => delProd(place._id)}
+                            className="bg-red-500 w-1/4 px-4 py-2 cursor-pointer text-white rounded-md"
+                            onClick={() => delCategory(category._id)}
                           >
                             Delete
                           </a>
@@ -126,11 +108,11 @@ const Places = () => {
                 page={parseInt(page)}
                 perPage={data.perPage}
                 count={data.count}
-                path="dashboard/places"
+                path="dashboard/categories"
               />
             </>
           ) : (
-            "There is no places, have been added yet."
+            "There is no categories, have been added yet."
           )
         ) : (
           <Spinner />
@@ -140,4 +122,4 @@ const Places = () => {
   );
 };
 
-export default Places;
+export default Categories;
