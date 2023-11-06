@@ -48,7 +48,6 @@ const categories = async (req, res) => {
         const count = await categoryCollection.countDocuments();
         const cursor = categoryCollection.find({}).skip(skip).limit(perPage).sort({ updatedAt: -1 });
         const response = await cursor.toArray();
-        console.log(response);
         return res.status(200).json({ perPage, count, categories: response });
     } catch (error) {
         console.log(error.message);
@@ -70,7 +69,7 @@ const fetchCategory = async (req, res) => {
         const client = await connect();
         const categoryCollection = client.db('mapworks').collection('category');
 
-        const response = categoryCollection.findOne({ _id: objID });
+        const response = await categoryCollection.findOne({ _id: objID });
 
         if (!response) {
             return res.status(404).json({ error: 'Category not found.' });

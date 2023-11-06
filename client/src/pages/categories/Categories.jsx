@@ -79,11 +79,11 @@ const Categories = () => {
                   </thead>
                   <tbody>
                     {data?.categories?.map((category) => (
-                      <tr key={category._id} className="odd:bg-gray-800">
-                        <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                      <tr key={category._id} >
+                        <td className="p-4 capitalize text-sm font-normal text-black">
                           {category.name}
                         </td>
-                        <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                        <td className="p-4 capitalize text-sm font-normal text-black">
                           <Link
                             to={`/dashboard/update-category/${category._id}`}
                             className="bg-palette4 w-1/4 px-5 py-2 cursor-pointer text-white rounded-md"
@@ -91,7 +91,7 @@ const Categories = () => {
                             Edit
                           </Link>
                         </td>
-                        <td className="p-3 capitalize text-sm font-normal text-gray-400">
+                        <td className="p-4 capitalize text-sm font-normal text-black">
                           <a
                             className="bg-red-500 w-1/4 px-4 py-2 cursor-pointer text-white rounded-md"
                             onClick={() => delCategory(category._id)}

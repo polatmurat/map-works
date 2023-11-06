@@ -11,6 +11,8 @@ import Places from "../pages/places/Places";
 import UpdatePlaces from "../pages/places/UpdatePlaces";
 import CreatePlace from "../pages/places/CreatePlace";
 import Categories from "../pages/categories/Categories";
+import CreateCategory from "../pages/categories/CreateCategory";
+import UpdateCategory from "../pages/categories/UpdateCategory";
 
 const Routing = () => {
   return (
@@ -84,6 +86,22 @@ const Routing = () => {
               element={
                 <PrivateUser>
                   <Categories />
+                </PrivateUser>
+              }
+            />
+            <Route
+              path="create-category"
+              element={
+                <PrivateUser>
+                  <CreateCategory />
+                </PrivateUser>
+              }
+            />
+            <Route
+              path="update-category/:id"
+              element={
+                <PrivateUser>
+                  <UpdateCategory />
                 </PrivateUser>
               }
             />
