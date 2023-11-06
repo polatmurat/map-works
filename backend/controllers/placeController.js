@@ -89,7 +89,7 @@ const fetch = async (req, res) => {
 
 };
 
-const deleteProduct = async (req, res) => {
+const deletePlace = async (req, res) => {
     const { id } = req.params;
     try {
         const objID = new ObjectId(id);
@@ -182,4 +182,4 @@ const fetchByCategory = async (req, res) => {
 };
 
 
-module.exports = { createPlace, get, deleteProduct, updatePlace, fetch, fetchByAuthor, fetchByCategory };
+module.exports = { createPlace, get, deletePlace, updatePlace, fetch, fetchByAuthor, fetchByCategory };

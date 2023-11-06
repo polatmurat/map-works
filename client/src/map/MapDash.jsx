@@ -1,4 +1,7 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import {} from "../features/place/placeService";
+
+
 import {
   GoogleMap,
   InfoWindow,

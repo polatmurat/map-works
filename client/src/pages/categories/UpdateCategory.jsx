@@ -3,9 +3,13 @@ import Wrapper from "../Wrapper";
 import ScreenHeader from "../../components/skeleton/ScreenHeader";
 import { BsArrowLeft } from "react-icons/bs";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useFetchCategoryQuery, useUpdateCategoryMutation } from "../../features/category/categoryService";
+import {
+  useFetchCategoryQuery,
+  useUpdateCategoryMutation,
+} from "../../features/category/categoryService";
 import { useDispatch } from "react-redux";
 import { setSuccess } from "../../app/reducers/globalReducer";
+import Spinner from "../../components/Spinner";
 
 const UpdateCategory = () => {
   const dispatch = useDispatch();
@@ -51,32 +55,34 @@ const UpdateCategory = () => {
             Category List
           </Link>
         </ScreenHeader>
-        <form className="w-full md:w-8/12" onSubmit={submitCategory}>
-          <h3 className="text-lg capitalize mb-3">Update Category</h3>
-          {errors.length > 0 &&
-            errors.map((error, key) => (
-              <div key={key} className="my-4">
-                <p className="alert-danger">{error.msg}</p>
-              </div>
-            ))}
-          <div className="mb-3">
-            <input
-              type="text"
-              name=""
-              value={state}
-              onChange={(e) => setState(e.target.value)}
-              className="form-control"
-              placeholder="Category Name..."
-            />
-          </div>
-          <div className="mb-3 flex justify-center">
-            <input
-              type="submit"
-              value={response.isLoading ? "Loading..." : "Update Category"}
-              className="btn-indigo"
-            />
-          </div>
-        </form>
+        {!isFetching ? (
+          <form className="w-full md:w-8/12" onSubmit={submitCategory}>
+            <h3 className="text-lg capitalize mb-3">Update Category</h3>
+            {errors.length > 0 &&
+              errors.map((error, key) => (
+                <div key={key} className="my-4">
+                  <p className="alert-danger">{error.msg}</p>
+                </div>
+              ))}
+            <div className="mb-3">
+              <input
+                type="text"
+                name=""
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                className="form-control"
+                placeholder="Category Name..."
+              />
+            </div>
+            <div className="mb-3 flex justify-center">
+              <input
+                type="submit"
+                value={response.isLoading ? "Loading..." : "Update Category"}
+                className="btn-indigo"
+              />
+            </div>
+          </form>
+        ) : <Spinner />}
       </Wrapper>
     </>
   );

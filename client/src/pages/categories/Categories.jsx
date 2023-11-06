@@ -5,7 +5,7 @@ import {
   useDeleteCategoryMutation,
 } from "../../features/category/categoryService";
 import toast, { Toaster } from "react-hot-toast";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearMessage } from "../../app/reducers/globalReducer";
 import Spinner from "../../components/Spinner";
 import Pagination from "../../components/skeleton/Pagination";
@@ -19,21 +19,24 @@ const Categories = () => {
     page = 1;
   }
 
+
+  const dispatch = useDispatch();
+
+
   const { data = [], isFetching } = useGetQuery(page ? page : 1);
 
-  // const { success } = useSelector((state) => state.globalReducer);
+  const { success } = useSelector((state) => state.globalReducer);
+  console.log("Success : ", success);
 
-  // const success = true;
+  useEffect(() => {
+    if (success) {
+      toast.success(success);
+    }
 
-  // useEffect(() => {
-  //   if (success) {
-  //     toast.success(success);
-  //   }
-
-  //   return () => {
-  //     dispatchEvent(clearMessage());
-  //   };
-  // }, []);
+    return () => {
+      dispatch(clearMessage());
+    };
+  }, []);
 
   console.log(data, " dataaaaa");
 
