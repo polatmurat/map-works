@@ -45,6 +45,15 @@ const placeService = createApi({
                 },
                 invalidatesTags: ['places']
             }),
+            allPlaces: builder.query({
+                query: () => {
+                    return {
+                        url: 'all-places',
+                        method: 'GET'
+                    }
+                }
+            }),
+
             getPlaces: builder.query({
                 query: (page) => ({
                     url: `places/${page}`,
@@ -68,7 +77,8 @@ export const {
     useGetPlacesQuery,
     useFetchPlaceQuery,
     useUpdatePlaceMutation,
-    useDeletePlaceMutation
+    useDeletePlaceMutation,
+    useAllPlacesQuery
 } = placeService;
 
 export default placeService;

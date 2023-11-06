@@ -1,48 +1,31 @@
 import React, { useEffect, useState } from "react";
 import {} from "../features/place/placeService";
 
-
 import {
   GoogleMap,
   InfoWindow,
   useLoadScript,
   Marker,
 } from "@react-google-maps/api";
+
+import { useAllPlacesQuery } from "../features/place/placeService";
+import Spinner from "../components/Spinner";
+
 const MapDash = ({ center }) => {
   const apiKey = "AIzaSyDAdnf6eqCFBTcFRQ3wHAFGIrVArQJzh0c";
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: apiKey,
   });
 
-  const [places, setPlaces] = useState([]);
+  const {data, isFetching} = useAllPlacesQuery();
+  console.log(data);
+
   const [selectedPlace, setSelectedPlace] = useState();
 
   const containerStyle = {
     width: "60%",
     height: "50vh",
   };
-
-  useEffect(() => {
-    const fetchURI = "http://localhost:5173/assets/places.json";
-
-    const fetchData = async () => {
-      try {
-        const response = await fetch(fetchURI);
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch data.");
-        }
-
-        const jsonData = await response.json();
-
-        setPlaces(jsonData);
-      } catch (error) {
-        throw new Error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   const handleMarkerClick = (place) => {
     setSelectedPlace(place);
@@ -67,22 +50,26 @@ const MapDash = ({ center }) => {
           center={center || { lat: 37.00128949807853, lng: 35.321856358738025 }} // Use the provided center or a default value
           zoom={15}
         >
-          {places.map((place) => (
-            <Marker
-              key={place.id}
-              position={{
-                lat: place.coordinates.lat,
-                lng: place.coordinates.lng,
-              }}
-              onClick={() => handleMarkerClick(place)}
-            />
-          ))}
+          {!isFetching ? (
+            data.places.map((place) => (
+              <Marker
+                key={place.id}
+                position={{
+                  lat: Number(place.coordinates.lat),
+                  lng: Number(place.coordinates.lng),
+                }}
+                onClick={() => handleMarkerClick(place)}
+              />
+            ))
+          ) : (
+            <Spinner />
+          )}
 
           {selectedPlace && (
             <InfoWindow
               position={{
-                lat: selectedPlace.coordinates.lat,
-                lng: selectedPlace.coordinates.lng,
+                lat: Number(selectedPlace.coordinates.lat),
+                lng: Number(selectedPlace.coordinates.lng),
               }}
               onCloseClick={handleCloseInfoWindow}
             >

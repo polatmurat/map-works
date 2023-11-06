@@ -181,5 +181,20 @@ const fetchByCategory = async (req, res) => {
     }
 };
 
+const getAllPlaces = async (req, res) => {
+    try {
+        const client = await connect();
+        const placeCollection = client.db('mapworks').collection('place');
 
-module.exports = { createPlace, get, deletePlace, updatePlace, fetch, fetchByAuthor, fetchByCategory };
+        const placesCursor = placeCollection.find({});
+        const places = await placesCursor.toArray(); // Convert the cursor to an array, await is important :)
+        return res.status(200).json({ places });
+
+    } catch (error) {
+        console.log(error.message);
+        return res.status(500).json("Server internal error!");
+    }
+};
+
+
+module.exports = { createPlace, get, deletePlace, updatePlace, fetch, fetchByAuthor, fetchByCategory, getAllPlaces };

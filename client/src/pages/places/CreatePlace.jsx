@@ -7,6 +7,7 @@ import Spinner from "../../components/Spinner";
 import toast, { Toaster } from "react-hot-toast";
 import ScreenHeader from "../../components/skeleton/ScreenHeader";
 import { useCreatePlaceMutation } from "../../features/place/placeService";
+import { useAllCategoriesQuery } from "../../features/category/categoryService";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { setSuccess } from "../../app/reducers/globalReducer";
@@ -18,12 +19,8 @@ const CreatePlace = () => {
   const { user } = useSelector((state) => state.authReducer);
 
   const [value, setValue] = useState("");
-  const [categories, setCategories] = useState([
-    "food",
-    "coffee",
-    "entertainment venue",
-    "historical places",
-  ]);
+
+  const { data = [], isFetching } = useAllCategoriesQuery();
 
   const [state, setState] = useState({
     name: "",
@@ -31,7 +28,7 @@ const CreatePlace = () => {
     city: "",
     province: "",
     coordinates: { lat: "", lng: "" },
-    authorID: user.id 
+    authorID: user.id,
   });
 
   const handlePlace = (e) => {
@@ -123,26 +120,31 @@ const CreatePlace = () => {
               />
             </div>
             <div className="w-full md:w-6/12 p-3">
-              <label htmlFor="category" className="input-label">
-                Category
-              </label>
-              <select
-                name="category"
-                id="category"
-                className="form-control"
-                onChange={handlePlace}
-                value={state.category}
-                required
-              >
-                <option value="" className="capitalize">
-                  Choose Category...
-                </option>
-                {categories.map((category, id) => (
-                  <option value={category} key={id} className="capitalize">
-                    {category}
-                  </option>
-                ))}
-              </select>
+            <label htmlFor="category" className="input-label">Category</label>
+              {!isFetching ? (
+                data.categories.length > 0 && (
+                  <select
+                    name="category"
+                    id="categories"
+                    className="form-control"
+                    onChange={handlePlace}
+                    value={state.category}
+                  >
+                    <option value="">Choose Category...</option>
+                    {data?.categories?.map((category) => (
+                      <option
+                        value={category.name}
+                        key={category._id}
+                        className="capitalize"
+                      >
+                        {category.name}
+                      </option>
+                    ))}
+                  </select>
+                )
+              ) : (
+                <Spinner />
+              )}
             </div>
             <div className="w-full p-3">
               <label className="input-label">Coordinates</label>
