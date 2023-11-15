@@ -153,7 +153,7 @@ const CreatePlace = () => {
                   Latitude
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="lat"
                   className="form-control"
                   value={state.coordinates.lat}
@@ -167,7 +167,7 @@ const CreatePlace = () => {
                   Longitude
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="lng"
                   className="form-control"
                   value={state.coordinates.lng}

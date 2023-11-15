@@ -43,7 +43,7 @@ const MapDash = ({ center }) => {
   return (
     <>
       {!isLoaded ? (
-        "Yükleniyor"
+        <Spinner />
       ) : (
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -78,7 +78,7 @@ const MapDash = ({ center }) => {
                 {/* <p>Stop Description: {selectedPlace.stop_desc}</p> */}
                 {/* <p>Stop Code: {selectedStop.stop_code}</p> */}
                 <p>
-                  Location: ({selectedPlace.coordinates.lat},{" "}
+                  Location: ({selectedPlace.coordinates.lat},
                   {selectedPlace.coordinates.lng})
                 </p>
               </div>

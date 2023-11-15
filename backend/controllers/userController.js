@@ -58,7 +58,7 @@ const login = async (req, res) => {
 
                 if (await comparePassword(password, user.password)) {
                     const token = await createToken(user);
-                    console.log(token);
+                    // console.log(token);
                     if(user.admin) {
                         return res.status(201).json({token, admin: true});
                     } else {
